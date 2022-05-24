@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Navbar } from "./Navbar";
 import { Hero } from "../../screens/home";
+import Footer from "../components/footer/Footer";
 
 interface Props {
   children: JSX.Element;
@@ -29,6 +30,7 @@ export const Layout = ({ children, showHero = false }: Props) => {
       >
         {children}
       </main>
+      <Footer />
     </div>
   );
 };

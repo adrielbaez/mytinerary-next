@@ -20,9 +20,12 @@ export const SectionContainer = ({ title, subtitle, children }: Props) => {
       </Stack>
       <Stack
         marginTop={6}
-        align={"center"}
-        gap={6}
+        gap={4}
         direction={{ base: "column", md: "column", lg: "row", xl: "row" }}
+        align={"center"}
+        alignItems="center"
+        justifyContent={"center"}
+        borderRadius="md"
       >
         {children}
       </Stack>

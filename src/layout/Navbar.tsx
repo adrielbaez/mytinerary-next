@@ -61,7 +61,7 @@ export const Navbar = () => {
       width="100%"
       position="sticky"
       top={0}
-      zIndex={100}
+      zIndex={400}
       bg="gray.100"
     >
       <Flex

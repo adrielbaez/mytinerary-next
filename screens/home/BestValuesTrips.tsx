@@ -1,34 +1,38 @@
 import React from "react";
 import { ImageCard } from "../../src/components/cards/ImageCard";
 import { SectionContainer } from "../../src/components/section/SectionContainer";
+import { Itinerary } from "../../interfaces/itinerariesCIty";
+import { NextPage } from "next";
+import {
+  ActivitiesCityResponse,
+  Activity,
+} from "../../interfaces/activitiesCity";
 
-export const BestValuesTrips = () => {
+interface Props {
+  itineraries: Itinerary[];
+  activities: Activity[];
+}
+
+export const BestValuesTrips: NextPage<Props> = ({
+  itineraries,
+  activities,
+}) => {
   return (
     <SectionContainer
       title="Best Value Trips"
       subtitle="Best offers trips from us"
     >
       <>
-        <ImageCard
-          urlImage="https://images6.alphacoders.com/739/thumbbig-739635.jpg"
-          alt="Tokio"
-          showRating={true}
-        />
-        <ImageCard
-          urlImage="https://images6.alphacoders.com/739/thumbbig-739635.jpg"
-          alt="Tokio"
-          showRating={true}
-        />
-        <ImageCard
-          urlImage="https://images6.alphacoders.com/739/thumbbig-739635.jpg"
-          alt="Tokio"
-          showRating={true}
-        />
-        <ImageCard
-          urlImage="https://images6.alphacoders.com/739/thumbbig-739635.jpg"
-          alt="Tokio"
-          showRating={true}
-        />
+        {activities.map((activity) => (
+          <ImageCard
+            key={activity._id}
+            urlImage={activity.image}
+            alt={activity.title}
+            showRating={true}
+            itineraries={itineraries}
+            title={activity.title}
+          />
+        ))}
       </>
     </SectionContainer>
   );

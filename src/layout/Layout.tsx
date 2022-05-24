@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Navbar } from "./Navbar";
-import { Hero } from "../components/Hero";
+import { Hero } from "../../screens/home";
 
 interface Props {
   children: JSX.Element;
@@ -10,7 +10,7 @@ interface Props {
 
 export const Layout = ({ children, showHero = false }: Props) => {
   return (
-    <>
+    <div>
       <Head>
         <title>{"Mytinerary - App"}</title>
         <meta name="author" content="Adriel Baez" />
@@ -29,6 +29,6 @@ export const Layout = ({ children, showHero = false }: Props) => {
       >
         {children}
       </main>
-    </>
+    </div>
   );
 };

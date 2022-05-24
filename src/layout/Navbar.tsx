@@ -1,97 +1,213 @@
-import { ReactNode } from "react";
 import {
   Box,
   Flex,
   Avatar,
-  Link,
+  HStack,
   Button,
+  Text,
+  Link,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  MenuDivider,
+  Stack,
+  Icon,
+  IconButton,
   useDisclosure,
   useColorModeValue,
-  Stack,
-  useColorMode,
-  Center,
-  Text,
+  chakra,
 } from "@chakra-ui/react";
-import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+// Here we have used react-icons package for the icons
+import { GiHamburgerMenu } from "react-icons/gi";
+import { AiOutlineClose, AiTwotoneThunderbolt } from "react-icons/ai";
+import { BiChevronDown } from "react-icons/bi";
+import { MdTimeline } from "react-icons/md";
+import { BsBook } from "react-icons/bs";
+import { FiSun } from "react-icons/fi";
+import { IconType } from "react-icons";
+import Image from "next/image";
 
-const NavLink = ({ children }: { children: ReactNode }) => (
-  <Link
-    px={2}
-    py={1}
-    rounded={"md"}
-    _hover={{
-      textDecoration: "none",
-      bg: useColorModeValue("gray.200", "gray.700"),
-    }}
-    href={"#"}
-  >
-    {children}
-  </Link>
-);
+const navLinks = [
+  { name: "About", path: "#" },
+  { name: "Blog", path: "#" },
+  { name: "Features", path: "#" },
+];
+
+const dropdownLinks = [
+  {
+    name: "Sign In",
+    path: "#",
+    icon: MdTimeline,
+  },
+  {
+    name: "Register",
+    path: "#",
+    icon: AiTwotoneThunderbolt,
+  },
+];
 
 export const Navbar = () => {
-  const { colorMode, toggleColorMode } = useColorMode();
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const menuProps = {
+    bg: useColorModeValue("gray.200", "gray.700"),
+    color: useColorModeValue("blue.500", "blue.200"),
+  };
+
   return (
-    <>
-      <Stack
-        bg={useColorModeValue("gray.100", "gray.900")}
-        height="90px"
-        px={4}
-        direction="row"
+    <Box
+      px={4}
+      boxShadow="lg"
+      width="100%"
+      position="sticky"
+      top={0}
+      zIndex={100}
+      bg="gray.100"
+    >
+      <Flex
+        h={16}
         alignItems="center"
         justifyContent="space-between"
+        maxW={800}
+        mx="auto"
       >
-        <Stack direction={"row"}>
-          <Text>Home</Text>
-          <Text>Home</Text>
-          <Text>Home</Text>
-        </Stack>
+        <IconButton
+          size="md"
+          icon={isOpen ? <AiOutlineClose /> : <GiHamburgerMenu />}
+          aria-label="Open Menu"
+          display={["inherit", "inherit", "none"]}
+          onClick={isOpen ? onClose : onOpen}
+        />
 
-        <Stack direction={"row"} spacing={7}>
-          <Button onClick={toggleColorMode}>
-            {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
-          </Button>
+        <HStack spacing={8} alignItems="center">
+          <chakra.span
+            color="primary.400"
+            bg="linear-gradient(transparent 50%, white 50%)"
+          >
+            MyTinerary
+          </chakra.span>
+          <HStack
+            as="nav"
+            spacing={1}
+            display={{ base: "none", md: "flex" }}
+            alignItems="center"
+          >
+            {navLinks.map((link, index) => (
+              <NavLink key={index} {...link} onClose={onClose} />
+            ))}
+          </HStack>
+        </HStack>
+        {/* Dropdown Menu */}
+        <Menu autoSelect={false} isLazy>
+          {({ isOpen, onClose }) => (
+            <>
+              <MenuButton _hover={{ color: "blue.400" }}>
+                <Flex alignItems="center">
+                  <Avatar
+                    href="#"
+                    as={Link}
+                    size="sm"
+                    showBorder={true}
+                    borderColor="blue.400"
+                    rounded="full"
+                    src="https://avatars2.githubusercontent.com/u/37842853?v=4"
+                  />
+                </Flex>
+              </MenuButton>
+              <MenuList
+                zIndex={5}
+                bg={useColorModeValue("rgb(255, 255, 255)", "rgb(26, 32, 44)")}
+                border="none"
+                boxShadow={useColorModeValue(
+                  "2px 4px 6px 2px rgba(160, 174, 192, 0.6)",
+                  "2px 4px 6px 2px rgba(9, 17, 28, 0.6)"
+                )}
+              >
+                {dropdownLinks.map((link, index) => (
+                  <MenuLink
+                    key={index}
+                    name={link.name}
+                    path={link.path}
+                    onClose={onClose}
+                  />
+                ))}
+              </MenuList>
+            </>
+          )}
+        </Menu>
+      </Flex>
 
-          <Menu>
-            <MenuButton
-              as={Button}
-              rounded={"full"}
-              variant={"link"}
-              cursor={"pointer"}
-              minW={0}
-            >
-              <Avatar
-                size={"sm"}
-                src={"https://avatars.dicebear.com/api/male/username.svg"}
-              />
-            </MenuButton>
-            <MenuList alignItems={"center"}>
-              <br />
-              <Center>
-                <Avatar
-                  size={"2xl"}
-                  src={"https://avatars.dicebear.com/api/male/username.svg"}
-                />
-              </Center>
-              <br />
-              <Center>
-                <p>Username</p>
-              </Center>
-              <br />
-              <MenuDivider />
-              <MenuItem>Your Servers</MenuItem>
-              <MenuItem>Account Settings</MenuItem>
-              <MenuItem>Logout</MenuItem>
-            </MenuList>
-          </Menu>
-        </Stack>
-      </Stack>
-    </>
+      {/* Mobile Screen Links */}
+      {isOpen ? (
+        <Box
+          pb={4}
+          display={["inherit", "inherit", "none"]}
+          position="absolute"
+          bg={"gray.100"}
+          width="100%"
+          left={0}
+        >
+          <Stack as="nav" spacing={2}>
+            {navLinks.map((link, index) => (
+              <NavLink key={index} {...link} onClose={onClose} />
+            ))}
+          </Stack>
+        </Box>
+      ) : null}
+    </Box>
+  );
+};
+
+// NavLink Component
+interface NavLinkProps {
+  name: string;
+  path: string;
+  onClose: () => void;
+}
+
+const NavLink = ({ name, path, onClose }: NavLinkProps) => {
+  const link = {
+    bg: useColorModeValue("gray.200", "gray.700"),
+    color: useColorModeValue("primary.400", "primary.200"),
+  };
+
+  return (
+    <Link
+      href={path}
+      px={3}
+      py={1}
+      lineHeight="inherit"
+      rounded="md"
+      _hover={{
+        textDecoration: "none",
+        bg: link.bg,
+        color: link.color,
+      }}
+      onClick={() => onClose()}
+    >
+      {name}
+    </Link>
+  );
+};
+
+// Dropdown MenuLink Component
+interface MenuLinkProps {
+  name: string;
+  path: string;
+  onClose: () => void;
+}
+
+const MenuLink = ({ name, path, onClose }: MenuLinkProps) => {
+  return (
+    <Link href={path} onClick={() => onClose()}>
+      <MenuItem
+        _hover={{
+          color: "blue.400",
+          bg: useColorModeValue("gray.200", "gray.700"),
+        }}
+      >
+        <Text>{name}</Text>
+      </MenuItem>
+    </Link>
   );
 };

@@ -9,7 +9,7 @@ interface Props {
 
 export const SectionContainer = ({ title, subtitle, children }: Props) => {
   return (
-    <Stack>
+    <Stack marginY={50}>
       <Stack align={"center"}>
         <chakra.h1 color={"primary.900"} fontSize="3xl" fontWeight="bold">
           {title}

@@ -29,7 +29,6 @@ export const BestValuesTrips: NextPage<Props> = ({
             urlImage={activity.image}
             alt={activity.title}
             showRating={true}
-            itineraries={itineraries}
             title={activity.title}
           />
         ))}

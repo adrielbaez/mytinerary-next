@@ -3,10 +3,12 @@ import type { GetStaticProps, NextPage } from "next";
 import { useEffect, useState } from "react";
 import { mytineraryApi } from "../api/mytinerayApi";
 import { CitiesResponse, City } from "../interfaces/citiesList";
-import { BestValuesTrips, PopularDestination } from "../screens/home";
+import { Banner, BestValuesTrips, PopularDestination } from "../screens/home";
 import { Layout } from "../src/layout/Layout";
 import { ItinerariesCity, Itinerary } from "../interfaces/itinerariesCIty";
 import { ActivitiesCityResponse, Activity } from "../interfaces/activitiesCity";
+import { conditionalBanner } from "../utils";
+import { FreeThisWeekend } from "../screens/home/FreeThisWeekend";
 
 interface Props {
   cities: City[];
@@ -19,7 +21,7 @@ const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
   const [itinerariesItems, setItinerariesItemns] = useState<Itinerary[]>([]);
   const [activitiesItems, setActivitiesItems] = useState<Activity[]>([]);
   useEffect(() => {
-    const data = cities.sort(() => (Math.random() > 0.5 ? 1 : -1)).slice(0, 4);
+    const data = cities.sort(() => (Math.random() > 0.5 ? 1 : -1));
     setNewCities(data);
 
     setItinerariesItemns(itineraries);
@@ -31,11 +33,21 @@ const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
   return (
     <Layout showHero>
       <>
-        <PopularDestination cities={newCities} />
+        <PopularDestination cities={newCities.slice(0, 4)} />
         <BestValuesTrips
           itineraries={itinerariesItems}
           activities={activitiesItems}
         />
+        {newCities.slice(4, 7).map((city, i) => (
+          <Banner
+            urlImage={city.src}
+            key={city._id}
+            cityName={city.city}
+            countryName={city.country}
+            align={conditionalBanner(i)}
+          />
+        ))}
+        <FreeThisWeekend cities={newCities.slice(0, 5)} />
       </>
     </Layout>
   );

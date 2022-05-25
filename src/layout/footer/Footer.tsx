@@ -10,29 +10,22 @@ import {
 // Here we have used react-icons package for the icons
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
-const links = [
-  "Blog",
-  "Documentation",
-  "Careers",
-  "Sign up",
-  "Terms of use",
-  "Privacy policy",
-];
+const links = ["Home", "Cities"];
 const accounts = [
   {
-    url: "https://github.com/MA-Ahmad/templateskart",
+    url: "https://github.com/adrielbaez",
     label: "Github Account",
     type: "gray",
     icon: <FaGithub />,
   },
   {
-    url: "https://twitter.com/muhammad_ahmaad",
+    url: "https://twitter.com/adrielbaez",
     label: "Twitter Account",
     type: "twitter",
     icon: <FaTwitter />,
   },
   {
-    url: "https://linkedin.com/in/muhammad-ahmad20",
+    url: "https://www.linkedin.com/in/adriel-baez/",
     label: "LinkedIn Account",
     type: "linkedin",
     icon: <FaLinkedin />,
@@ -42,21 +35,24 @@ const accounts = [
 const Footer = () => {
   return (
     <Stack
-      maxW="5xl"
+      maxW="full"
       marginInline="auto"
       p={8}
       spacing={{ base: 8, md: 0 }}
       justifyContent="space-between"
       alignItems="center"
       direction={{ base: "column", md: "row" }}
+      bg="gray.100"
     >
-      <Link href="https://templateskart.com" isExternal>
-        <Image
-          w="100px"
-          src="/assets/images/layouts/hero_image.png"
-          alt="TemplatesKart"
-        />
-      </Link>
+      <Image
+        src="https://i.imgur.com/Dq3x1hl.png"
+        alt="Logo mytinerary"
+        width={20}
+        height={20}
+        style={{
+          filter: "brightness(0.7)",
+        }}
+      />
 
       {/* Desktop Screen */}
       <HStack

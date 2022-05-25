@@ -80,12 +80,16 @@ export const Navbar = () => {
         />
 
         <HStack spacing={8} alignItems="center">
-          <chakra.span
-            color="primary.400"
-            bg="linear-gradient(transparent 50%, white 50%)"
-          >
-            MyTinerary
-          </chakra.span>
+          <Image
+            src="https://i.imgur.com/Dq3x1hl.png"
+            alt="Logo mytinerary"
+            width={40}
+            height={40}
+            style={{
+              filter: "brightness(0.7)",
+            }}
+            priority
+          />
           <HStack
             as="nav"
             spacing={1}

@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import { Navbar } from "./Navbar";
 import { Hero } from "../../screens/home";
-import Footer from "../components/footer/Footer";
+import Footer from "./footer/Footer";
 
 interface Props {
   children: JSX.Element;
@@ -26,6 +26,7 @@ export const Layout = ({ children, showHero = false }: Props) => {
           padding: "0px 20px",
           maxWidth: "1200px",
           margin: "auto",
+          overflow: "hidden",
         }}
       >
         {children}

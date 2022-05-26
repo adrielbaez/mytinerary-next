@@ -9,6 +9,7 @@ import { ItinerariesCity, Itinerary } from "../interfaces/itinerariesCIty";
 import { ActivitiesCityResponse, Activity } from "../interfaces/activitiesCity";
 import { conditionalBanner } from "../utils";
 import { FreeThisWeekend } from "../screens/home/FreeThisWeekend";
+import { SectionContainer } from "../src/components/section/SectionContainer";
 
 interface Props {
   cities: City[];
@@ -34,19 +35,28 @@ const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
     <Layout showHero>
       <>
         <PopularDestination cities={newCities.slice(0, 4)} />
+
+        <SectionContainer
+          title="RECENT POSTS"
+          subtitle="Countries"
+          withFragment
+        >
+          <>
+            {newCities.slice(4, 7).map((city, i) => (
+              <Banner
+                urlImage={city.src}
+                key={city._id}
+                cityName={city.city}
+                countryName={city.country}
+                align={conditionalBanner(i)}
+              />
+            ))}
+          </>
+        </SectionContainer>
         <BestValuesTrips
           itineraries={itinerariesItems}
           activities={activitiesItems}
         />
-        {newCities.slice(4, 7).map((city, i) => (
-          <Banner
-            urlImage={city.src}
-            key={city._id}
-            cityName={city.city}
-            countryName={city.country}
-            align={conditionalBanner(i)}
-          />
-        ))}
         <FreeThisWeekend cities={newCities.slice(0, 5)} />
       </>
     </Layout>

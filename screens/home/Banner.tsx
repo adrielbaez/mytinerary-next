@@ -7,6 +7,7 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
+import Image from "next/image";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 interface Props {
@@ -23,55 +24,45 @@ export const Banner: NextPage<Props> = ({
   align = "center",
 }) => {
   return (
-    <Stack overflow="hidden">
-      <Flex
-        w={"full"}
-        h={"40vh"}
-        backgroundImage={`url(${urlImage})`}
-        backgroundSize={"cover"}
-        backgroundPosition={"center center"}
+    <Stack
+      overflow="hidden"
+      position="relative"
+      width="full"
+      height="40vh"
+      align="center"
+      justify="center"
+    >
+      <Image
+        src={urlImage}
+        alt={cityName}
+        objectFit="cover"
+        layout="fill"
+        objectPosition="center"
         className="zoom"
-      >
-        <VStack
-          w={"full"}
-          justify={"center"}
-          align={align}
-          px={useBreakpointValue({ base: 4, md: 8 })}
-          bgGradient={"linear(to-r, blackAlpha.600, transparent)"}
-        >
-          <Stack maxW={"2xl"} align={"flex-start"} spacing={6}>
-            <Stack direction={"row"} align="center">
-              <FaMapMarkerAlt size={24} color="white" />
-              <Text
-                color={"white"}
-                fontWeight={700}
-                lineHeight={1.2}
-                fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
-              >
-                {`${cityName}, ${countryName}`}
-              </Text>
-            </Stack>
-            <Stack direction={"row"}>
-              <Button
-                bg={"blue.400"}
-                rounded={"full"}
-                color={"white"}
-                _hover={{ bg: "blue.500" }}
-              >
-                Show me more
-              </Button>
-              <Button
-                bg={"whiteAlpha.300"}
-                rounded={"full"}
-                color={"white"}
-                _hover={{ bg: "whiteAlpha.500" }}
-              >
-                Show me more
-              </Button>
-            </Stack>
-          </Stack>
-        </VStack>
-      </Flex>
+      />
+      <Stack maxW={"2xl"} align={"center"} spacing={6} zIndex={1}>
+        <Stack direction={"row"} align="center">
+          <FaMapMarkerAlt size={24} color="white" />
+          <Text
+            color={"white"}
+            fontWeight={700}
+            lineHeight={1.2}
+            fontSize={useBreakpointValue({ base: "3xl", md: "4xl" })}
+          >
+            {`${cityName}, ${countryName}`}
+          </Text>
+        </Stack>
+        <Stack direction={"row"}>
+          <Button
+            bg={"white"}
+            rounded={"full"}
+            color={"secundary.500"}
+            _hover={{ bg: "secundary.500", color: "primary.400" }}
+          >
+            Show me more
+          </Button>
+        </Stack>
+      </Stack>
     </Stack>
   );
 };

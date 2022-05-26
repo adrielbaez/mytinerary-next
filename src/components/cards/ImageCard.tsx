@@ -31,6 +31,8 @@ export const ImageCard = ({
       shadow="lg"
       borderRadius="lg"
       overflow="hidden"
+      className="card"
+      cursor={!showRating ? "pointer" : "default"}
     >
       <Image
         src={urlImage}

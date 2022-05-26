@@ -5,24 +5,30 @@ import { FaStar, FaMoneyBillAlt } from "react-icons/fa";
 import { Itinerary } from "../../../interfaces/itinerariesCIty";
 import { Activity } from "../../../interfaces/activitiesCity";
 import { RatingCard } from "./RatingCard";
+import { useRouter } from "next/router";
 
 interface Props {
+  id: string;
   urlImage: string;
-  alt: string;
+  title: string;
   width?: string;
   height?: string;
   showRating?: boolean;
-  title?: string;
+  citiesCard?: boolean;
 }
 
 export const ImageCard = ({
+  id,
   urlImage,
-  alt,
+  title,
   width = "350px",
   height = "300px",
   showRating = false,
-  title,
 }: Props) => {
+  const router = useRouter();
+  const handleClickCity = () => {
+    router.push(`/city/${id}`);
+  };
   return (
     <Box
       width={{ base: width, md: "90vw", lg: "280px", xl: "280px" }}
@@ -33,10 +39,11 @@ export const ImageCard = ({
       overflow="hidden"
       className="card"
       cursor={!showRating ? "pointer" : "default"}
+      onClick={!showRating ? handleClickCity : undefined}
     >
       <Image
         src={urlImage}
-        alt={alt}
+        alt={title}
         layout="fill"
         objectFit="cover"
         priority
@@ -49,7 +56,7 @@ export const ImageCard = ({
         fontWeight="700"
         marginLeft={5}
       >
-        {alt}
+        {title}
       </chakra.h1>
       {/* description itenerary */}
       {showRating ? <RatingCard title={title!} /> : null}

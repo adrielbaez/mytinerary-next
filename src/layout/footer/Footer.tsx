@@ -37,12 +37,13 @@ const Footer = () => {
     <Stack
       maxW="full"
       marginInline="auto"
-      p={8}
+      p={4}
       spacing={{ base: 8, md: 0 }}
       justifyContent="space-between"
       alignItems="center"
       direction={{ base: "column", md: "row" }}
       bg="gray.100"
+      width="100%"
     >
       <Image
         src="https://i.imgur.com/Dq3x1hl.png"

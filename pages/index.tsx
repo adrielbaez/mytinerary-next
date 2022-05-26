@@ -13,26 +13,23 @@ import { SectionContainer } from "../src/components/section/SectionContainer";
 
 interface Props {
   cities: City[];
-  itineraries: Itinerary[];
   activities: Activity[];
 }
 
-const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
+const Home: NextPage<Props> = ({ cities, activities }) => {
   const [newCities, setNewCities] = useState<City[]>([]);
-  const [itinerariesItems, setItinerariesItemns] = useState<Itinerary[]>([]);
   const [activitiesItems, setActivitiesItems] = useState<Activity[]>([]);
   useEffect(() => {
     const data = cities.sort(() => (Math.random() > 0.5 ? 1 : -1));
     setNewCities(data);
 
-    setItinerariesItemns(itineraries);
     setActivitiesItems(
       activities.sort(() => (Math.random() > 0.5 ? 1 : -1)).slice(0, 3)
     );
-  }, [cities, itineraries, activities]);
+  }, [cities, activities]);
 
   return (
-    <Layout showHero>
+    <Layout title="Mytinerary - App" showHero>
       <>
         <PopularDestination cities={newCities.slice(0, 4)} />
 
@@ -44,6 +41,7 @@ const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
           <>
             {newCities.slice(4, 7).map((city, i) => (
               <Banner
+                id={city._id}
                 urlImage={city.src}
                 key={city._id}
                 cityName={city.city}
@@ -53,10 +51,7 @@ const Home: NextPage<Props> = ({ cities, itineraries, activities }) => {
             ))}
           </>
         </SectionContainer>
-        <BestValuesTrips
-          itineraries={itinerariesItems}
-          activities={activitiesItems}
-        />
+        <BestValuesTrips activities={activitiesItems} />
         <FreeThisWeekend cities={newCities.slice(0, 5)} />
       </>
     </Layout>
@@ -67,12 +62,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const { data } = await mytineraryApi.get<CitiesResponse>("/cities");
 
   const cities: City[] = data.respuesta;
-
-  const ushuaiaID = "6078dee3f5f2d747d0050da3";
-
-  const { data: itineraries } = await mytineraryApi.get<ItinerariesCity>(
-    `city/itineraries/${ushuaiaID}`
-  );
 
   const itinerary1Promise = mytineraryApi.get<ActivitiesCityResponse>(
     "/activities/itinerary/6084d84d309fac4c44e87ca2"
@@ -89,7 +78,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   return {
     props: {
       cities,
-      itineraries: itineraries.respuesta,
       activities: [
         ...itinerary1Response.data.respuesta,
         ...itinerary2Response.data.respuesta,

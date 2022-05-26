@@ -17,7 +17,12 @@ export const PopularDestination: NextPage<Props> = ({ cities }) => {
     >
       <>
         {cities.map((city) => (
-          <ImageCard key={city._id} urlImage={city.src} alt={city.city} />
+          <ImageCard
+            id={city._id}
+            key={city._id}
+            urlImage={city.src}
+            title={city.city}
+          />
         ))}
       </>
     </SectionContainer>

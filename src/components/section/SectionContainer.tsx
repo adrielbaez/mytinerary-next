@@ -3,7 +3,7 @@ import React from "react";
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   children: JSX.Element;
   withFragment?: boolean;
 }
@@ -15,7 +15,7 @@ export const SectionContainer = ({
   withFragment = false,
 }: Props) => {
   return (
-    <Stack marginY={50}>
+    <Stack>
       <Stack align={"center"}>
         <chakra.h1
           color={"primary.900"}

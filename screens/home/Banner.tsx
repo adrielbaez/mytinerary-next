@@ -8,9 +8,11 @@ import {
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { FaMapMarkerAlt } from "react-icons/fa";
 
 interface Props {
+  id: string;
   urlImage: string;
   cityName: string;
   countryName: string;
@@ -18,11 +20,16 @@ interface Props {
 }
 
 export const Banner: NextPage<Props> = ({
+  id,
   urlImage,
   cityName,
   countryName,
   align = "center",
 }) => {
+  const router = useRouter();
+  const handleClickCity = () => {
+    router.push(`/city/${id}`);
+  };
   return (
     <Stack
       overflow="hidden"
@@ -58,6 +65,7 @@ export const Banner: NextPage<Props> = ({
             rounded={"full"}
             color={"secundary.500"}
             _hover={{ bg: "secundary.500", color: "primary.400" }}
+            onClick={handleClickCity}
           >
             Show me more
           </Button>

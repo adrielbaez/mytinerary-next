@@ -9,14 +9,10 @@ import {
 } from "../../interfaces/activitiesCity";
 
 interface Props {
-  itineraries: Itinerary[];
   activities: Activity[];
 }
 
-export const BestValuesTrips: NextPage<Props> = ({
-  itineraries,
-  activities,
-}) => {
+export const BestValuesTrips: NextPage<Props> = ({ activities }) => {
   return (
     <SectionContainer
       title="Best Value Trips"
@@ -25,9 +21,9 @@ export const BestValuesTrips: NextPage<Props> = ({
       <>
         {activities.map((activity) => (
           <ImageCard
+            id={activity._id}
             key={activity._id}
             urlImage={activity.image}
-            alt={activity.title}
             showRating={true}
             title={activity.title}
           />

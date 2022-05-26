@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Box,
   Flex,
@@ -20,24 +21,21 @@ import {
 // Here we have used react-icons package for the icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose, AiTwotoneThunderbolt } from "react-icons/ai";
-import { BiChevronDown } from "react-icons/bi";
 import { MdTimeline } from "react-icons/md";
-import { BsBook } from "react-icons/bs";
-import { FiSun } from "react-icons/fi";
-import { IconType } from "react-icons";
+
 import Image from "next/image";
+import { FaUserAlt } from "react-icons/fa";
 
 const navLinks = [
-  { name: "About", path: "#" },
-  { name: "Blog", path: "#" },
-  { name: "Features", path: "#" },
+  { name: "Home", path: "/" },
+  { name: "Cities", path: "/cities" },
 ];
 
 const dropdownLinks = [
   {
     name: "Sign In",
     path: "#",
-    icon: MdTimeline,
+    icon: <FaUserAlt />,
   },
   {
     name: "Register",
@@ -176,21 +174,22 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
   };
 
   return (
-    <Link
-      href={path}
-      px={3}
-      py={1}
-      lineHeight="inherit"
-      rounded="md"
-      _hover={{
-        textDecoration: "none",
-        bg: link.bg,
-        color: link.color,
-      }}
-      onClick={() => onClose()}
-    >
-      {name}
-    </Link>
+    <NextLink href={path} passHref>
+      <Link
+        px={3}
+        py={1}
+        lineHeight="inherit"
+        rounded="md"
+        _hover={{
+          textDecoration: "none",
+          bg: link.bg,
+          color: link.color,
+        }}
+        onClick={() => onClose()}
+      >
+        {name}
+      </Link>
+    </NextLink>
   );
 };
 
@@ -203,15 +202,18 @@ interface MenuLinkProps {
 
 const MenuLink = ({ name, path, onClose }: MenuLinkProps) => {
   return (
-    <Link href={path} onClick={() => onClose()}>
-      <MenuItem
-        _hover={{
-          color: "blue.400",
-          bg: useColorModeValue("gray.200", "gray.700"),
-        }}
-      >
-        <Text>{name}</Text>
-      </MenuItem>
-    </Link>
+    <NextLink href={path} passHref>
+      <Link onClick={() => onClose()} lineHeight="inherit">
+        <MenuItem
+          _hover={{
+            textDecoration: "none",
+            color: "blue.400",
+            bg: useColorModeValue("gray.200", "gray.700"),
+          }}
+        >
+          <Text>{name}</Text>
+        </MenuItem>
+      </Link>
+    </NextLink>
   );
 };

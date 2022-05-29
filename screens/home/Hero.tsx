@@ -21,7 +21,7 @@ export const Hero = () => {
       }}
     >
       <Image
-        src="/canada-nature.jpg"
+        src="https://i.imgur.com/0AGCzZb.jpg"
         alt="Polynesia"
         layout="fill"
         objectFit="cover"

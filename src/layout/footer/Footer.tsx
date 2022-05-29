@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Stack,
   HStack,
@@ -11,28 +12,24 @@ import {
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 const links = [
-  "Blog",
-  "Documentation",
-  "Careers",
-  "Sign up",
-  "Terms of use",
-  "Privacy policy",
+  { name: "Home", path: "/" },
+  { name: "Cities", path: "/cities" },
 ];
 const accounts = [
   {
-    url: "https://github.com/MA-Ahmad/templateskart",
+    url: "https://github.com/adrielbaez",
     label: "Github Account",
     type: "gray",
     icon: <FaGithub />,
   },
   {
-    url: "https://twitter.com/muhammad_ahmaad",
+    url: "https://twitter.com/adrielbaez",
     label: "Twitter Account",
     type: "twitter",
     icon: <FaTwitter />,
   },
   {
-    url: "https://linkedin.com/in/muhammad-ahmad20",
+    url: "https://www.linkedin.com/in/adriel-baez/",
     label: "LinkedIn Account",
     type: "linkedin",
     icon: <FaLinkedin />,
@@ -42,21 +39,25 @@ const accounts = [
 const Footer = () => {
   return (
     <Stack
-      maxW="5xl"
+      maxW="full"
       marginInline="auto"
-      p={8}
+      p={4}
       spacing={{ base: 8, md: 0 }}
       justifyContent="space-between"
       alignItems="center"
       direction={{ base: "column", md: "row" }}
+      bg="gray.100"
+      width="100%"
     >
-      <Link href="https://templateskart.com" isExternal>
-        <Image
-          w="100px"
-          src="/assets/images/layouts/hero_image.png"
-          alt="TemplatesKart"
-        />
-      </Link>
+      <Image
+        src="https://i.imgur.com/Dq3x1hl.png"
+        alt="Logo mytinerary"
+        width={20}
+        height={20}
+        style={{
+          filter: "brightness(0.7)",
+        }}
+      />
 
       {/* Desktop Screen */}
       <HStack
@@ -65,12 +66,14 @@ const Footer = () => {
         display={{ base: "none", md: "flex" }}
       >
         {links.map((link, index) => (
-          <CustomLink key={index}>{link}</CustomLink>
+          <CustomLink key={index} path={link.path}>
+            {link.name}
+          </CustomLink>
         ))}
       </HStack>
 
       {/* Mobile and Tablet Screens */}
-      <Stack display={{ base: "flex", md: "none" }} alignItems="center">
+      {/* <Stack display={{ base: "flex", md: "none" }} alignItems="center">
         <HStack alignItems="center">
           <CustomLink>Sign up</CustomLink>
           <Divider h="1rem" orientation="vertical" />
@@ -84,7 +87,7 @@ const Footer = () => {
           <CustomLink>Terms of use</CustomLink>
         </HStack>
         <CustomLink>Privacy policy</CustomLink>
-      </Stack>
+      </Stack> */}
 
       <Stack
         direction="row"
@@ -109,16 +112,17 @@ const Footer = () => {
   );
 };
 
-const CustomLink = ({ children, ...props }: LinkProps) => {
+interface CustomLinkProps extends LinkProps {
+  path: string;
+}
+
+const CustomLink = ({ children, path, ...props }: CustomLinkProps) => {
   return (
-    <Link
-      href="#"
-      fontSize="sm"
-      _hover={{ textDecoration: "underline" }}
-      {...props}
-    >
-      {children}
-    </Link>
+    <NextLink href={path} passHref>
+      <Link fontSize="sm" _hover={{ textDecoration: "underline" }} {...props}>
+        {children}
+      </Link>
+    </NextLink>
   );
 };
 

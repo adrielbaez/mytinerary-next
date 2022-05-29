@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Box,
   Flex,
@@ -20,24 +21,21 @@ import {
 // Here we have used react-icons package for the icons
 import { GiHamburgerMenu } from "react-icons/gi";
 import { AiOutlineClose, AiTwotoneThunderbolt } from "react-icons/ai";
-import { BiChevronDown } from "react-icons/bi";
 import { MdTimeline } from "react-icons/md";
-import { BsBook } from "react-icons/bs";
-import { FiSun } from "react-icons/fi";
-import { IconType } from "react-icons";
+
 import Image from "next/image";
+import { FaUserAlt } from "react-icons/fa";
 
 const navLinks = [
-  { name: "About", path: "#" },
-  { name: "Blog", path: "#" },
-  { name: "Features", path: "#" },
+  { name: "Home", path: "/" },
+  { name: "Cities", path: "/cities" },
 ];
 
 const dropdownLinks = [
   {
     name: "Sign In",
     path: "#",
-    icon: MdTimeline,
+    icon: <FaUserAlt />,
   },
   {
     name: "Register",
@@ -61,7 +59,7 @@ export const Navbar = () => {
       width="100%"
       position="sticky"
       top={0}
-      zIndex={100}
+      zIndex={400}
       bg="gray.100"
     >
       <Flex
@@ -80,12 +78,16 @@ export const Navbar = () => {
         />
 
         <HStack spacing={8} alignItems="center">
-          <chakra.span
-            color="primary.400"
-            bg="linear-gradient(transparent 50%, white 50%)"
-          >
-            MyTinerary
-          </chakra.span>
+          <Image
+            src="https://i.imgur.com/Dq3x1hl.png"
+            alt="Logo mytinerary"
+            width={40}
+            height={40}
+            style={{
+              filter: "brightness(0.7)",
+            }}
+            priority
+          />
           <HStack
             as="nav"
             spacing={1}
@@ -172,21 +174,22 @@ const NavLink = ({ name, path, onClose }: NavLinkProps) => {
   };
 
   return (
-    <Link
-      href={path}
-      px={3}
-      py={1}
-      lineHeight="inherit"
-      rounded="md"
-      _hover={{
-        textDecoration: "none",
-        bg: link.bg,
-        color: link.color,
-      }}
-      onClick={() => onClose()}
-    >
-      {name}
-    </Link>
+    <NextLink href={path} passHref>
+      <Link
+        px={3}
+        py={1}
+        lineHeight="inherit"
+        rounded="md"
+        _hover={{
+          textDecoration: "none",
+          bg: link.bg,
+          color: link.color,
+        }}
+        onClick={() => onClose()}
+      >
+        {name}
+      </Link>
+    </NextLink>
   );
 };
 
@@ -199,15 +202,18 @@ interface MenuLinkProps {
 
 const MenuLink = ({ name, path, onClose }: MenuLinkProps) => {
   return (
-    <Link href={path} onClick={() => onClose()}>
-      <MenuItem
-        _hover={{
-          color: "blue.400",
-          bg: useColorModeValue("gray.200", "gray.700"),
-        }}
-      >
-        <Text>{name}</Text>
-      </MenuItem>
-    </Link>
+    <NextLink href={path} passHref>
+      <Link onClick={() => onClose()} lineHeight="inherit">
+        <MenuItem
+          _hover={{
+            textDecoration: "none",
+            color: "blue.400",
+            bg: useColorModeValue("gray.200", "gray.700"),
+          }}
+        >
+          <Text>{name}</Text>
+        </MenuItem>
+      </Link>
+    </NextLink>
   );
 };

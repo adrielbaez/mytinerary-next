@@ -10,8 +10,8 @@ interface Props {
 }
 export const FreeThisWeekend: NextPage<Props> = ({ cities }) => {
   const router = useRouter();
-  const handleClickCity = (id: string) => {
-    router.push(`/city/${id}`);
+  const handleClickCity = (city: string) => {
+    router.push(`/city/${city.toLocaleLowerCase().split(" ").join("-")}`);
   };
   return (
     <SectionContainer
@@ -30,7 +30,7 @@ export const FreeThisWeekend: NextPage<Props> = ({ cities }) => {
             _hover={{
               cursor: "pointer",
             }}
-            onClick={() => handleClickCity(city._id)}
+            onClick={() => handleClickCity(city.city)}
           >
             <Avatar
               size="lg"

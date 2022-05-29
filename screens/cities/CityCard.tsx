@@ -10,8 +10,8 @@ interface Props {
 
 const CityCard: NextPage<Props> = ({ city }) => {
   const router = useRouter();
-  const handleClickCity = (id: string) => {
-    router.push(`/city/${id}`);
+  const handleClickCity = (city: string) => {
+    router.push(`/city/${city.toLocaleLowerCase().split(" ").join("-")}`);
   };
   return (
     <GridItem
@@ -21,7 +21,7 @@ const CityCard: NextPage<Props> = ({ city }) => {
       position="relative"
       className="card"
       cursor="pointer"
-      onClick={() => handleClickCity(city._id)}
+      onClick={() => handleClickCity(city.city)}
       style={{
         filter: "brightness(0.8)",
       }}

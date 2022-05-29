@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Navbar } from "./Navbar";
-import { Hero } from "../../screens/home";
+import { HeroContent } from "../../screens/home";
 import Footer from "./footer/Footer";
 import { Stack } from "@chakra-ui/react";
 
@@ -21,7 +21,7 @@ export const Layout = ({ children, showHero = false, title }: Props) => {
         <meta name="keywords" content="paises, countries, cities" />
       </Head>
       <Navbar />
-      {showHero ? <Hero /> : null}
+      {showHero ? <HeroContent /> : null}
 
       <div
         style={{

@@ -9,9 +9,15 @@ interface Props {
   children: JSX.Element;
   showHero?: boolean;
   title: string;
+  marginTop?: boolean;
 }
 
-export const Layout = ({ children, showHero = false, title }: Props) => {
+export const Layout = ({
+  children,
+  showHero = false,
+  title,
+  marginTop = true,
+}: Props) => {
   return (
     <>
       <Head>
@@ -39,7 +45,7 @@ export const Layout = ({ children, showHero = false, title }: Props) => {
             overflow: "hidden",
             width: "100%",
             flex: 1,
-            margin: "10px 0px",
+            margin: marginTop ? "10px 0px" : "0px 0px",
             backgroundColor: "white",
           }}
         >

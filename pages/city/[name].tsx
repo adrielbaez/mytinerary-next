@@ -3,13 +3,20 @@ import React from "react";
 import { mytineraryApi } from "../../api/mytinerayApi";
 import { CitiesResponse, City } from "../../interfaces/citiesList";
 import { CityHero } from "../../screens/city/CityHero";
+import { Layout } from "../../src/layout";
 
 interface Props {
   cityFinded: City;
 }
 
 const CitiesPage: NextPage<Props> = ({ cityFinded: city }) => {
-  return <CityHero city={city} />;
+  return (
+    <Layout title="Cities - Mytinerary" marginTop={false}>
+      <>
+        <CityHero city={city} />;
+      </>
+    </Layout>
+  );
 };
 
 export const getStaticPaths: GetStaticPaths = async (ctx) => {

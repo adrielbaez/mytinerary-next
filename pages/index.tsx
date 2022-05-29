@@ -10,23 +10,37 @@ import { ActivitiesCityResponse, Activity } from "../interfaces/activitiesCity";
 import { conditionalBanner } from "../utils";
 import { FreeThisWeekend } from "../screens/home/FreeThisWeekend";
 import { SectionContainer } from "../src/components/section/SectionContainer";
+import { useAppDispatch, useAppSelector } from "../src/hooks/redux";
+import { getCities } from "../src/redux/cities";
 
 interface Props {
   cities: City[];
   activities: Activity[];
 }
 
-const Home: NextPage<Props> = ({ cities, activities }) => {
+const Home: NextPage<Props> = ({ cities: citiesServer, activities }) => {
   const [newCities, setNewCities] = useState<City[]>([]);
   const [activitiesItems, setActivitiesItems] = useState<Activity[]>([]);
-  useEffect(() => {
-    const data = cities.sort(() => (Math.random() > 0.5 ? 1 : -1));
-    setNewCities(data);
+  // load cities and activities
+  const dispatch = useAppDispatch();
+  const { cities } = useAppSelector((state) => state.cities);
 
-    setActivitiesItems(
-      activities.sort(() => (Math.random() > 0.5 ? 1 : -1)).slice(0, 3)
-    );
-  }, [cities, activities]);
+  useEffect(() => {
+    if (cities) {
+      dispatch(getCities(citiesServer));
+      setNewCities(cities);
+      setActivitiesItems(activities);
+    }
+  }, [cities, activities, dispatch, citiesServer]);
+
+  // useEffect(() => {
+  //   const data = citiesServer.sort(() => (Math.random() > 0.5 ? 1 : -1));
+  //   setNewCities(data);
+
+  //   setActivitiesItems(
+  //     activities.sort(() => (Math.random() > 0.5 ? 1 : -1)).slice(0, 3)
+  //   );
+  // }, [citiesServer, activities]);
 
   return (
     <Layout title="Mytinerary - App" showHero>
@@ -51,7 +65,7 @@ const Home: NextPage<Props> = ({ cities, activities }) => {
             ))}
           </>
         </SectionContainer>
-        <BestValuesTrips activities={activitiesItems} />
+        <BestValuesTrips activities={activitiesItems.slice(0, 3)} />
         <FreeThisWeekend cities={newCities.slice(0, 5)} />
       </>
     </Layout>

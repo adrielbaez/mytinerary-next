@@ -3,9 +3,12 @@ import React from "react";
 import CityCard from "../../screens/cities/CityCard";
 import { Search } from "../../screens/cities/Search";
 import { SectionContainer } from "../../src/components/section/SectionContainer";
+import { useAppSelector } from "../../src/hooks/redux";
 import { Layout } from "../../src/layout";
 
 const Cities = () => {
+  const { cities } = useAppSelector((state) => state.cities);
+
   return (
     <Layout title="Cities">
       <SectionContainer title="Cities" withFragment>
@@ -20,11 +23,9 @@ const Cities = () => {
             }}
             gap={6}
           >
-            <CityCard />
-            <CityCard />
-            <CityCard />
-            <CityCard />
-            <CityCard />
+            {cities.map((city) => (
+              <CityCard key={city._id} city={city} />
+            ))}
           </Grid>
         </>
       </SectionContainer>

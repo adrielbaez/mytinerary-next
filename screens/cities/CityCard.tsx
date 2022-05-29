@@ -1,7 +1,13 @@
 import { Box, GridItem } from "@chakra-ui/react";
+import { NextPage } from "next";
 import Image from "next/image";
+import { City } from "../../interfaces/citiesList";
 
-const CityCard = () => {
+interface Props {
+  city: City;
+}
+
+const CityCard: NextPage<Props> = ({ city }) => {
   return (
     <GridItem
       w="100%"
@@ -11,12 +17,7 @@ const CityCard = () => {
       className="card"
       cursor="pointer"
     >
-      <Image
-        src={`https://i.imgur.com/0AGCzZb.jpg`}
-        alt="una city"
-        objectFit="cover"
-        layout="fill"
-      />
+      <Image src={city.src} alt={city.city} objectFit="cover" layout="fill" />
     </GridItem>
   );
 };

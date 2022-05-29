@@ -38,7 +38,7 @@ const Cities: NextPage<Props> = ({ cities: citiesServer }) => {
   }, [term, cities]);
 
   return (
-    <Layout title="Cities">
+    <Layout title="Cities - Mytinerary">
       <SectionContainer title="Cities" withFragment>
         <>
           <Search onSearch={(value) => setTerm(value)} />

@@ -43,7 +43,7 @@ const Home: NextPage<Props> = ({ cities: citiesServer, activities }) => {
   // }, [citiesServer, activities]);
 
   return (
-    <Layout title="Mytinerary - App" showHero>
+    <Layout title="Home - Mytinerary" showHero>
       <>
         <PopularDestination cities={newCities.slice(0, 4)} />
 

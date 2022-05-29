@@ -3,21 +3,29 @@ import React, { useState } from "react";
 import CityCard from "../../screens/cities/CityCard";
 import { Search } from "../../screens/cities/Search";
 import { SectionContainer } from "../../src/components/section/SectionContainer";
-import { useAppSelector } from "../../src/hooks/redux";
+import { useAppDispatch, useAppSelector } from "../../src/hooks/redux";
 import { Layout } from "../../src/layout";
 import { useEffect } from "react";
-import { City } from "../../interfaces/citiesList";
+import { CitiesResponse, City } from "../../interfaces/citiesList";
+import { GetStaticProps, NextPage } from "next";
+import { mytineraryApi } from "../../api/mytinerayApi";
+import { getCities } from "../../src/redux/cities";
 
-const Cities = () => {
+interface Props {
+  cities: City[];
+}
+
+const Cities: NextPage<Props> = ({ cities: citiesServer }) => {
   const { cities } = useAppSelector((state) => state.cities);
   const [term, setTerm] = useState("");
   const [citiesFiltered, setCitiesFiltered] = useState<City[]>([]);
 
+  const dispatch = useAppDispatch();
   useEffect(() => {
-    if (cities) {
-      setCitiesFiltered(cities);
+    if (cities.length === 0) {
+      dispatch(getCities(citiesServer));
     }
-  }, [cities]);
+  }, [citiesServer, dispatch, cities]);
 
   useEffect(() => {
     if (term === "") {
@@ -51,6 +59,18 @@ const Cities = () => {
       </SectionContainer>
     </Layout>
   );
+};
+
+export const getStaticProps: GetStaticProps = async (ctx) => {
+  const { data } = await mytineraryApi.get<CitiesResponse>("/cities");
+
+  const cities: City[] = data.respuesta;
+
+  return {
+    props: {
+      cities,
+    },
+  };
 };
 
 export default Cities;

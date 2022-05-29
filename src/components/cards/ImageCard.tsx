@@ -8,7 +8,7 @@ import { RatingCard } from "./RatingCard";
 import { useRouter } from "next/router";
 
 interface Props {
-  id: string;
+  id?: string;
   urlImage: string;
   title: string;
   width?: string;
@@ -27,7 +27,7 @@ export const ImageCard = ({
 }: Props) => {
   const router = useRouter();
   const handleClickCity = () => {
-    router.push(`/city/${id}`);
+    router.push(`/city/${title.toLocaleLowerCase().split(" ").join("-")}`);
   };
   return (
     <Box

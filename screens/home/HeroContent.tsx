@@ -1,41 +1,13 @@
 import * as React from "react";
 import { Container, chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
 import Image from "next/image";
+import { Hero } from "../../src/components/hero/Hero";
 // Here we have used react-icons package for the icons
 
-export const Hero = () => {
+export const HeroContent = () => {
   return (
-    <Stack
-      direction="column"
-      spacing={6}
-      alignItems="center"
-      justifyContent="center"
-      bgColor={"red.300"}
-      position="relative"
-      height={{
-        base: "80vh",
-        md: "80vh",
-        lg: "80vh",
-        xl: "80vh",
-        "2xl": "90vh",
-      }}
-    >
-      <Image
-        src="https://i.imgur.com/0AGCzZb.jpg"
-        alt="Polynesia"
-        layout="fill"
-        objectFit="cover"
-        style={{
-          filter: "brightness(0.7)",
-        }}
-        priority
-      />
-      <Stack
-        direction="column"
-        spacing={6}
-        alignItems="center"
-        position={"absolute"}
-      >
+    <Hero image="https://i.imgur.com/0AGCzZb.jpg" title="Canada nature">
+      <>
         <chakra.h1
           fontSize={{ base: "4xl", sm: "5xl" }}
           fontWeight="bold"
@@ -70,7 +42,7 @@ export const Hero = () => {
             {`Let's Go!!`}
           </Button>
         </Stack>
-      </Stack>
-    </Stack>
+      </>
+    </Hero>
   );
 };

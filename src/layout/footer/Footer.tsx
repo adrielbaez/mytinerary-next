@@ -1,3 +1,4 @@
+import NextLink from "next/link";
 import {
   Stack,
   HStack,
@@ -10,7 +11,10 @@ import {
 // Here we have used react-icons package for the icons
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
-const links = ["Home", "Cities"];
+const links = [
+  { name: "Home", path: "/" },
+  { name: "Cities", path: "/cities" },
+];
 const accounts = [
   {
     url: "https://github.com/adrielbaez",
@@ -62,12 +66,14 @@ const Footer = () => {
         display={{ base: "none", md: "flex" }}
       >
         {links.map((link, index) => (
-          <CustomLink key={index}>{link}</CustomLink>
+          <CustomLink key={index} path={link.path}>
+            {link.name}
+          </CustomLink>
         ))}
       </HStack>
 
       {/* Mobile and Tablet Screens */}
-      <Stack display={{ base: "flex", md: "none" }} alignItems="center">
+      {/* <Stack display={{ base: "flex", md: "none" }} alignItems="center">
         <HStack alignItems="center">
           <CustomLink>Sign up</CustomLink>
           <Divider h="1rem" orientation="vertical" />
@@ -81,7 +87,7 @@ const Footer = () => {
           <CustomLink>Terms of use</CustomLink>
         </HStack>
         <CustomLink>Privacy policy</CustomLink>
-      </Stack>
+      </Stack> */}
 
       <Stack
         direction="row"
@@ -106,16 +112,17 @@ const Footer = () => {
   );
 };
 
-const CustomLink = ({ children, ...props }: LinkProps) => {
+interface CustomLinkProps extends LinkProps {
+  path: string;
+}
+
+const CustomLink = ({ children, path, ...props }: CustomLinkProps) => {
   return (
-    <Link
-      href="#"
-      fontSize="sm"
-      _hover={{ textDecoration: "underline" }}
-      {...props}
-    >
-      {children}
-    </Link>
+    <NextLink href={path} passHref>
+      <Link fontSize="sm" _hover={{ textDecoration: "underline" }} {...props}>
+        {children}
+      </Link>
+    </NextLink>
   );
 };
 

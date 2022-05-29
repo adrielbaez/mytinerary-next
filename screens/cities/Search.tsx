@@ -19,7 +19,7 @@ interface Props {
 export const Search: NextPage<Props> = ({ onSearch }) => {
   const [textValue, setTextValue] = useState("");
 
-  const deboncedValue = useDebouncedSearch(textValue);
+  const deboncedValue = useDebouncedSearch(textValue.toLowerCase().trim());
 
   useEffect(() => {
     onSearch(deboncedValue);

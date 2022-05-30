@@ -5,7 +5,6 @@ import { mytineraryApi } from "../api/mytinerayApi";
 import { CitiesResponse, City } from "../interfaces/citiesList";
 import { Banner, BestValuesTrips, PopularDestination } from "../screens/home";
 import { Layout } from "../src/layout/Layout";
-import { ItinerariesCity, Itinerary } from "../interfaces/itinerariesCIty";
 import { ActivitiesCityResponse, Activity } from "../interfaces/activitiesCity";
 import { conditionalBanner } from "../utils";
 import { FreeThisWeekend } from "../screens/home/FreeThisWeekend";

@@ -1,24 +1,57 @@
 import {
   Button,
   Collapse,
+  Divider,
+  Heading,
   Stack,
   useColorModeValue,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import React from "react";
+import { useActivities } from "../../../src/hooks/useActivities";
+import { ActivityCard } from "./ActivityCard";
+import { Commnets } from "../comments/Comments";
+import { Itinerary } from "../../../interfaces/itinerariesCIty";
 
 interface Props {
-  isOpensds?: boolean;
+  city: string;
+  id: string;
+  isOpen: boolean;
+  onToggle: () => void;
+  itinerary: Itinerary;
 }
-export const ActivitiesSection: NextPage<Props> = ({ isOpensds }) => {
-  const { isOpen, onToggle } = useDisclosure();
+export const ActivitiesSection: NextPage<Props> = ({
+  id,
+  isOpen,
+  onToggle,
+  city,
+  itinerary,
+}) => {
+  const { isLoading, activities } = useActivities(id);
+  console.log(activities);
+
   return (
-    <Stack marginTop={0} bg={useColorModeValue("white", "gray.800")}>
+    <Stack bg={useColorModeValue("white", "gray.800")} mt={10}>
       <Collapse in={isOpen} animateOpacity>
-        <Stack width={400} height={250} bg="blue.300">
-          ActivitiesSection
+        <Heading fontSize={"xl"} color="primary.900" textAlign={"center"}>
+          {`Activities to do in ${city}`}
+        </Heading>
+        {/* Activities */}
+        <Stack
+          width="full"
+          // height={250}
+          direction={{ base: "column", md: "row" }}
+          align="center"
+          mt={3}
+        >
+          {!isLoading &&
+            activities!.map((activity) => (
+              <ActivityCard activity={activity} key={activity._id} />
+            ))}
         </Stack>
+        {/* comments */}
+        <Divider h={10} />
+        <Commnets itinerary={itinerary} />
       </Collapse>
       <Button
         w={"full"}
@@ -31,7 +64,7 @@ export const ActivitiesSection: NextPage<Props> = ({ isOpensds }) => {
         }}
         onClick={onToggle}
       >
-        Clic
+        {isOpen ? "View Less" : "View More"}
       </Button>
     </Stack>
   );

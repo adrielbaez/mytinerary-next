@@ -23,10 +23,9 @@ export const BannerItinerary: NextPage<Props> = ({ itinerary }) => {
       w={"full"}
       h="full"
       bg={useColorModeValue("white", "gray.800")}
-      boxShadow={"2xl"}
       rounded={"md"}
       overflow={"hidden"}
-      margin={0}
+      mb={25}
     >
       <Image
         h={"120px"}

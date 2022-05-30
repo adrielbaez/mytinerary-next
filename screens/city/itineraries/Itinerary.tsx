@@ -4,6 +4,7 @@ import {
   useDisclosure,
   Text,
   useColorModeValue,
+  Box,
 } from "@chakra-ui/react";
 import { NextPage } from "next";
 import React from "react";
@@ -16,6 +17,9 @@ interface Props {
 }
 
 export const Itinerary: NextPage<Props> = ({ itinerary }) => {
+  const { isOpen, onToggle } = useDisclosure();
+  console.log(itinerary);
+
   return (
     <Stack
       width={{
@@ -31,8 +35,15 @@ export const Itinerary: NextPage<Props> = ({ itinerary }) => {
     >
       <Stack m={0}>
         <BannerItinerary itinerary={itinerary} />
-        <ActivitiesSection />
+        <ActivitiesSection
+          city={itinerary.cityId.city}
+          id={itinerary._id}
+          isOpen={isOpen}
+          onToggle={onToggle}
+          itinerary={itinerary}
+        />
       </Stack>
+      <Box bg="red.200"></Box>
     </Stack>
   );
 };

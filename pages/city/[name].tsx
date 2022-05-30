@@ -36,7 +36,7 @@ const CitiesPage: NextPage<Props> = ({ cityFinded: city, itineraries }) => {
             Find the best Itinerary for your next trip!
           </chakra.h1>
         </Stack>
-        <Stack align={"center"} marginBottom={"0px"}>
+        <Stack align={"center"}>
           {itineraries.map((itinerary) => (
             <Itinerary itinerary={itinerary} key={itinerary._id} />
           ))}
@@ -76,8 +76,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { data } = await mytineraryApi.get<ItinerariesCityResponse>(
     `/city/itineraries/${cityFinded._id}`
   );
-
-  console.log(data.respuesta);
 
   return {
     props: {

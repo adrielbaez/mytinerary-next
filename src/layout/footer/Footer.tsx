@@ -66,28 +66,23 @@ const Footer = () => {
         display={{ base: "none", md: "flex" }}
       >
         {links.map((link, index) => (
-          <CustomLink key={index} path={link.path}>
+          <CustomLink key={`${link.name}${link.name}${index}`} path={link.path}>
             {link.name}
           </CustomLink>
         ))}
       </HStack>
 
       {/* Mobile and Tablet Screens */}
-      {/* <Stack display={{ base: "flex", md: "none" }} alignItems="center">
+      <Stack display={{ base: "flex", md: "none" }} alignItems="center">
         <HStack alignItems="center">
-          <CustomLink>Sign up</CustomLink>
-          <Divider h="1rem" orientation="vertical" />
-          <CustomLink>Blog</CustomLink>
-          <Divider h="1rem" orientation="vertical" />
-          <CustomLink>Career</CustomLink>
+          {links.map((link, index) => (
+            <Stack key={`${link.path}${index}`}>
+              <CustomLink path={link.path}>{link.name}</CustomLink>
+              <Divider h="1rem" orientation="vertical" />
+            </Stack>
+          ))}
         </HStack>
-        <HStack alignItems="center">
-          <CustomLink>Documentation</CustomLink>
-          <Divider h="1rem" orientation="vertical" />
-          <CustomLink>Terms of use</CustomLink>
-        </HStack>
-        <CustomLink>Privacy policy</CustomLink>
-      </Stack> */}
+      </Stack>
 
       <Stack
         direction="row"
@@ -96,16 +91,16 @@ const Footer = () => {
         alignItems="center"
       >
         {accounts.map((sc, index) => (
-          <IconButton
-            key={index}
-            as={Link}
-            isExternal
-            href={sc.url}
-            aria-label={sc.label}
-            colorScheme={sc.type}
-            icon={sc.icon}
-            rounded="md"
-          />
+          <NextLink key={`${index}${sc.url}`} href={sc.url} passHref>
+            <a target="_blank">
+              <IconButton
+                aria-label={sc.label}
+                colorScheme={sc.type}
+                icon={sc.icon}
+                rounded="md"
+              />
+            </a>
+          </NextLink>
         ))}
       </Stack>
     </Stack>

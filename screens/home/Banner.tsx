@@ -28,7 +28,7 @@ export const Banner: NextPage<Props> = ({
 }) => {
   const router = useRouter();
   const handleClickCity = () => {
-    router.push(`/city/${id}`);
+    router.push(`/city/${cityName.toLocaleLowerCase().split(" ").join("-")}`);
   };
   return (
     <Stack

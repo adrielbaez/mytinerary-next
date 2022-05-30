@@ -78,16 +78,20 @@ export const Navbar = () => {
         />
 
         <HStack spacing={8} alignItems="center">
-          <Image
-            src="https://i.imgur.com/Dq3x1hl.png"
-            alt="Logo mytinerary"
-            width={40}
-            height={40}
-            style={{
-              filter: "brightness(0.7)",
-            }}
-            priority
-          />
+          <NextLink href="/" passHref>
+            <a>
+              <Image
+                src="https://i.imgur.com/Dq3x1hl.png"
+                alt="Logo mytinerary"
+                width={40}
+                height={40}
+                style={{
+                  filter: "brightness(0.7)",
+                }}
+                priority
+              />
+            </a>
+          </NextLink>
           <HStack
             as="nav"
             spacing={1}
@@ -149,7 +153,7 @@ export const Navbar = () => {
           width="100%"
           left={0}
         >
-          <Stack as="nav" spacing={2}>
+          <Stack as="nav" spacing={2} align={"center"}>
             {navLinks.map((link, index) => (
               <NavLink key={index} {...link} onClose={onClose} />
             ))}

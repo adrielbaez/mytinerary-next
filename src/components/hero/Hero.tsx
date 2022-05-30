@@ -17,7 +17,6 @@ export const Hero: NextPage<Props> = ({ children, image, title }) => {
       spacing={6}
       alignItems="center"
       justifyContent="center"
-      bgColor={"red.300"}
       position="relative"
       height={{
         base: "80vh",

@@ -4,19 +4,23 @@ import { Navbar } from "./Navbar";
 import { HeroContent } from "../../screens/home";
 import Footer from "./footer/Footer";
 import { Stack } from "@chakra-ui/react";
+import { CityHero } from "../../screens/city/CityHero";
+import { City } from "../../interfaces/citiesList";
 
 interface Props {
   children: JSX.Element;
   showHero?: boolean;
   title: string;
-  marginTop?: boolean;
+  showHeroCity?: boolean;
+  city?: City;
 }
 
 export const Layout = ({
   children,
   showHero = false,
   title,
-  marginTop = true,
+  showHeroCity = false,
+  city,
 }: Props) => {
   return (
     <>
@@ -28,6 +32,7 @@ export const Layout = ({
       </Head>
       <Navbar />
       {showHero ? <HeroContent /> : null}
+      {showHeroCity ? <CityHero city={city!} /> : null}
 
       <div
         style={{
@@ -45,7 +50,7 @@ export const Layout = ({
             overflow: "hidden",
             width: "100%",
             flex: 1,
-            margin: marginTop ? "10px 0px" : "0px 0px",
+            margin: "10px 0px",
             backgroundColor: "white",
           }}
         >

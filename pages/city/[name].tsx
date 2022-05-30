@@ -4,6 +4,9 @@ import { mytineraryApi } from "../../api/mytinerayApi";
 import { CitiesResponse, City } from "../../interfaces/citiesList";
 import { CityHero } from "../../screens/city/CityHero";
 import { Layout } from "../../src/layout";
+import { chakra, Stack } from "@chakra-ui/react";
+import { Itinerary } from "../../screens/city/Itinerary";
+import { Details } from "../../screens/city/Details";
 
 interface Props {
   cityFinded: City;
@@ -11,9 +14,26 @@ interface Props {
 
 const CitiesPage: NextPage<Props> = ({ cityFinded: city }) => {
   return (
-    <Layout title="Cities - Mytinerary" marginTop={false}>
+    <Layout title="Cities - Mytinerary" showHeroCity city={city}>
       <>
-        <CityHero city={city} />;
+        <Details
+          city={city.city}
+          country={city.country}
+          description={city.description}
+        />
+        <Stack align={"center"}>
+          <chakra.h1
+            color={"primary.900"}
+            fontSize="3xl"
+            fontWeight="bold"
+            textTransform="uppercase"
+          >
+            Itineraries
+          </chakra.h1>
+        </Stack>
+        <Stack align={"center"}>
+          <Itinerary />
+        </Stack>
       </>
     </Layout>
   );

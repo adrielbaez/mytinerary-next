@@ -34,7 +34,7 @@ export const Search: NextPage<Props> = ({ onSearch }) => {
         }}
       >
         <Input
-          placeholder="Enter amount"
+          placeholder="Search city"
           focusBorderColor="primary.400"
           rounded={"full"}
           value={textValue}

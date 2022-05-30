@@ -17,7 +17,6 @@ const CityCard: NextPage<Props> = ({ city }) => {
     <GridItem
       w="100%"
       h="250"
-      bg="blue.500"
       position="relative"
       className="card"
       cursor="pointer"

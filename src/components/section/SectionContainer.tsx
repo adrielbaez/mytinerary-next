@@ -15,7 +15,12 @@ export const SectionContainer = ({
   withFragment = false,
 }: Props) => {
   return (
-    <Stack>
+    <Stack
+      style={{
+        marginTop: "5rem",
+        marginBottom: "5rem",
+      }}
+    >
       <Stack align={"center"}>
         <chakra.h1
           color={"primary.900"}

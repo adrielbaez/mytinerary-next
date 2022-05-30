@@ -6,6 +6,7 @@ import { CityHero } from "../../screens/city/CityHero";
 import { Layout } from "../../src/layout";
 import { chakra, Stack } from "@chakra-ui/react";
 import { Itinerary } from "../../screens/city/Itinerary";
+import { Details } from "../../screens/city/Details";
 
 interface Props {
   cityFinded: City;
@@ -15,6 +16,11 @@ const CitiesPage: NextPage<Props> = ({ cityFinded: city }) => {
   return (
     <Layout title="Cities - Mytinerary" showHeroCity city={city}>
       <>
+        <Details
+          city={city.city}
+          country={city.country}
+          description={city.description}
+        />
         <Stack align={"center"}>
           <chakra.h1
             color={"primary.900"}

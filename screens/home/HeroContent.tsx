@@ -1,9 +1,15 @@
 import * as React from "react";
 import { chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
 import { Hero } from "../../src/components/hero/Hero";
+import { useRouter } from "next/router";
 // Here we have used react-icons package for the icons
 
 export const HeroContent = () => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push("/cities");
+  };
   return (
     <Hero image="/playa.jpg" title="Canada nature">
       <>
@@ -33,6 +39,7 @@ export const HeroContent = () => {
             fontSize="1.2rem"
             bg="white"
             color={"primary.900"}
+            onClick={handleClick}
           >
             Go to Cities
           </Button>

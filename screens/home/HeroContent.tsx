@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Container, chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
-import Image from "next/image";
+import { chakra, Stack, Text, Button, Box } from "@chakra-ui/react";
 import { Hero } from "../../src/components/hero/Hero";
 // Here we have used react-icons package for the icons
 
 export const HeroContent = () => {
   return (
-    <Hero image="https://i.imgur.com/0AGCzZb.jpg" title="Canada nature">
+    <Hero image="/playa.jpg" title="Canada nature">
       <>
         <chakra.h1
           fontSize={{ base: "4xl", sm: "5xl" }}
@@ -15,13 +14,7 @@ export const HeroContent = () => {
           color="white"
           maxW="600px"
         >
-          Welcome to {""}
-          <chakra.span
-            color="primary.400"
-            bg="linear-gradient(transparent 50%, white 50%)"
-          >
-            MyTinerary
-          </chakra.span>
+          MyTinerary
         </chakra.h1>
         <Text maxW="550px" fontSize="xl" textAlign="center" color="white">
           Find your perfect trip, designed by insiders who know and love their
@@ -38,8 +31,10 @@ export const HeroContent = () => {
             size="lg"
             height="3.5rem"
             fontSize="1.2rem"
+            bg="white"
+            color={"primary.900"}
           >
-            {`Let's Go!!`}
+            Go to Cities
           </Button>
         </Stack>
       </>

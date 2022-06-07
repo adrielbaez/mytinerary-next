@@ -28,7 +28,6 @@ export const ActivitiesSection: NextPage<Props> = ({
   itinerary,
 }) => {
   const { isLoading, activities } = useActivities(id);
-  console.log(activities);
 
   return (
     <Stack bg={useColorModeValue("white", "gray.800")} mt={10}>

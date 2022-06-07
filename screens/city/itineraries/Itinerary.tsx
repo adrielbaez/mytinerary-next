@@ -18,7 +18,6 @@ interface Props {
 
 export const Itinerary: NextPage<Props> = ({ itinerary }) => {
   const { isOpen, onToggle } = useDisclosure();
-  console.log(itinerary);
 
   return (
     <Stack
